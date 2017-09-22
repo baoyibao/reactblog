@@ -4,7 +4,10 @@ import Backmenu from '../../component/backmenu';
 
 import Backindex from '../../container/Backindex';
 import Articles from '../../container/Articles';
+import Addarticles from '../../container/Addarticles';
 import Picture from '../../container/Picture';
+
+
 class backstage extends React.Component {
 	constructor(props, context) {
 		super(props, context);
@@ -16,6 +19,7 @@ class backstage extends React.Component {
 				<div className="rightWrap">
 					<Route path="/backstage" exact component={Backindex}/>
 					<Route path="/backstage/articles" component={Articles} />
+					<Route path="/backstage/addarticles" component={Addarticles} />
         	<Route path="/backstage/picture" component={Picture} />
 				</div>
 			</div>

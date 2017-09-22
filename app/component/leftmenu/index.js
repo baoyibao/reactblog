@@ -2,9 +2,16 @@ import React from 'react'
 import {
   Link
 } from 'react-router-dom';
-import { Menu, Icon } from 'antd';
-
+import { Menu, Icon,Button } from 'antd';
+import {connect} from 'react-redux';
 import './leftmenu.less';
+import { loginSuccess } from '../../actions'
+import { bindActionCreators } from 'redux';
+
+import createHistory from 'history/createHashHistory';
+
+const history = createHistory();
+
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
 class leftmenu extends React.Component {
@@ -14,6 +21,7 @@ class leftmenu extends React.Component {
       current: '1',
       openKeys: [],
     };
+    props:props;
     this.handleClick = this.handleClick.bind(this);
     this.onOpenChange = this.onOpenChange.bind(this);
     this.getAncestorKeys = this.getAncestorKeys.bind(this);
@@ -42,7 +50,17 @@ class leftmenu extends React.Component {
     };
     return map[key] || [];
   }
+  joinBack() {
+    const loginIn = this.props.loginIn;
+    if(!loginIn) {
+      console.log(this.props)
+      this.props.history.push('/login');
+    }else{
+      this.props.history.push('/backstage');
+    }
+  }
   render() {
+    const { history,joinBack,loginIn} = this.props
     return (
       <div className="leftMenu l-height-100">
         <div className="left-headbg"></div>
@@ -74,10 +92,23 @@ class leftmenu extends React.Component {
         </Menu>
         <div className="author text-center l-width-100">
           <p>Copyright © lw</p>
-          <Link to="/login">后台管理</Link>
+          <Button onClick={this.joinBack.bind(this)}>后台管理</Button>
         </div>
       </div>
     )
   }
 }
-export default leftmenu
+function mapStateToProps(state){
+  return {
+    loginIn:state.login.loginIn,
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+  }
+}
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(leftmenu);

@@ -1,10 +1,13 @@
 import React from 'react';
-import { Form, Input,Icon, Button, notification,Checkbox} from 'antd';
+import { Form, Input,Icon, Button, notification,Checkbox } from 'antd';
 import './login.less';
 import axios from 'axios';
 import createHistory from 'history/createHashHistory';
 import {Link} from 'react-router-dom';
-import {connect} from 'redux';
+import {connect} from 'react-redux';
+import { loginSuccess } from '../../actions'
+import { bindActionCreators } from 'redux';
+
 const history = createHistory();
 
 const FormItem = Form.Item;
@@ -14,7 +17,6 @@ class LoginPage extends React.Component {
 		super(props);
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.openNotificationWithIcon = this.openNotificationWithIcon.bind(this);
-		posts:[];
 	}
 	handleSubmit(e){
 		e.preventDefault();
@@ -30,7 +32,8 @@ class LoginPage extends React.Component {
 		   	})
 	   		.then(res => {
 	   			if(res.data ==1){
-	   				this.props.history.push('/backstage');
+            this.props.loginSuccess();
+            this.props.history.push('/backstage'); 
 	   			}
 	   			else {
 	   				this.openNotificationWithIcon('info');
@@ -46,11 +49,12 @@ class LoginPage extends React.Component {
 			duration: 6
   	})
   }
-  render() {  
-    const { getFieldDecorator } = this.props.form;      
+  render() {
+    const { getFieldDecorator } = this.props.form;
+    const {loginIn,loginSuccess,text} = this.props;      
     return (
       <div id="loginpagewrap">
-        <p>游客登录</p>
+        <p>游客登录{text}</p>
         <div id="loginWrap">                
           <Form onSubmit={this.handleSubmit} className="login-form">
             <FormItem>
@@ -76,7 +80,7 @@ class LoginPage extends React.Component {
               )}
               <a className="login-form-forgot" href="">忘记密码</a>
               <Button type="primary" htmlType="submit" className="login-form-button">
-                 登陆
+                登陆
               </Button>
               <a>现在注册!</a>
             </FormItem>
@@ -86,19 +90,21 @@ class LoginPage extends React.Component {
     );
   }
 }
-function mapStateToProps(){
+function mapStateToProps(state){
   return {
-
+    loginIn:state.login.loginIn,
   }
 }
-function mapDispatchToProps() {
-  return {
 
+function mapDispatchToProps(dispatch) {
+  return {
+    loginSuccess:bindActionCreators(loginSuccess,dispatch)
   }
-} 
+}
+
 let Login = Form.create()(LoginPage);
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Login);
+  export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(Login);
 

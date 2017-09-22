@@ -5,11 +5,14 @@ class Counter extends React.Component {
 	constructor(props, context) {
 		super(props, context);
 	}
+    componentDidMount() {
+     console.log(this.props);
+    }
 	render() {
-        const {text, onChangeText, onButtonClick} = this.props;  
+        const {text, onChangeText, onButtonClick,username} = this.props;  
         return (  
             <div>  
-                <h1>{text}</h1>
+                <h1>{text}{username}</h1>
                 <button onClick={onChangeText}>添加</button>  
                 <button onClick={onButtonClick}>减少</button>  
             </div>
@@ -26,7 +29,7 @@ const buttonClickAction = {
 }
   
 function mapStateToProps(state) {  
-    return { text: state.text }  
+    return { text: state.add.text }  
 }  
   
 //映射Redux actions到组件的属性  

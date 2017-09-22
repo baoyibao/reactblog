@@ -22,8 +22,11 @@ class backmenu extends React.Component {
           theme=""
         >
           <Menu.Item key="1"><Link to="/backstage">流量图表</Link></Menu.Item>
-          <Menu.Item key="2"><Link to="/backstage/articles">文章管理</Link></Menu.Item>
-          <Menu.Item key="3"><Link to="/backstage/picture">图片管理</Link></Menu.Item>
+          <SubMenu key="sub2" title={<span><span>文章管理</span></span>}>
+            <Menu.Item key="2"><Link to="/backstage/articles">文章列表</Link></Menu.Item>
+            <Menu.Item key="3"><Link to="/backstage/addarticles">添加文章</Link></Menu.Item>
+          </SubMenu>
+          <Menu.Item key="4"><Link to="/backstage/picture">图片管理</Link></Menu.Item>
         </Menu>
         <div className="author text-center l-width-100">
           <p>Copyright © lw</p>

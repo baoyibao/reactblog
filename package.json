@@ -23,6 +23,7 @@
     "html-webpack-plugin": "^2.30.1",
     "less": "^2.7.2",
     "less-loader": "^4.0.5",
+    "marked": "^0.3.6",
     "open-browser-webpack-plugin": "^0.0.5",
     "postcss-loader": "^2.0.6",
     "promise": "^8.0.1",
@@ -45,7 +46,13 @@
     "webpack-dev-server": "^2.6.1"
   },
   "dependencies": {
+    "draft-js": "^0.10.1",
     "echarts-for-react": "^1.4.4",
-    "react-redux": "^5.0.6"
+    "react-addons-css-transition-group": "^15.6.0",
+    "react-lz-editor": "^0.11.5",
+    "react-markdown": "^2.5.0",
+    "react-quill": "^1.1.0",
+    "react-redux": "^5.0.6",
+    "react-transition-group": "^2.2.0"
   }
 }
